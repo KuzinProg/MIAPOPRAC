@@ -1,0 +1,39 @@
+create table authors
+(
+    author_id   integer not null
+        constraint authors_pk
+            primary key,
+    last_name   varchar(100),
+    first_name  varchar(100),
+    middle_name varchar(100)
+);
+
+alter table authors
+    owner to postgres;
+
+create table authorship
+(
+    book_id   integer not null
+        constraint authorship_books_null_fk
+            references books,
+    author_id integer not null
+        constraint authorship_authors_null_fk
+            references authors,
+    seq_num   integer,
+    constraint authorship_pk
+        primary key (book_id, author_id)
+);
+
+alter table authorship
+    owner to postgres;
+	
+	create table books
+(
+    book_id integer not null
+        constraint books_pk
+            primary key,
+    title   varchar(100)
+);
+
+alter table books
+    owner to postgres;
